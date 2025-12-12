@@ -599,21 +599,44 @@ body {
 /* Frame container (replaces previous avatar placeholder visually) */
 /* ---------- Rotating neon ring for the About profile (paste into styles.css) ---------- */
 /* Frame container (replaces previous avatar placeholder visually) */
+/* ---------- Rotating neon ring for the About profile ---------- */
 .about-profile-frame {
-  --size: 150px;            /* reduced overall size */
+  --size: 140px;            /* Fixed size */
   width: var(--size);
   height: var(--size);
   border-radius: 50%;
   position: relative;
-  padding: 4px;            /* reduced padding for tighter ring */
+  padding: 0;               /* No padding - image fills exactly */
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255,255,255,0.02);
-  cursor: pointer;
-  overflow: visible;        /* allow ring to extend outward */
+  background: rgba(10, 10, 15, 0.8);
+  overflow: hidden;         /* ✅ CRITICAL: Clips image to circle */
   transition: transform 0.32s ease;
   z-index: 3;
+  border: 3px solid transparent;  /* Space for the ring */
+}
+
+.about-profile-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;         /* ✅ CRITICAL: Ensures image stays in circle */
+  z-index: 6;
+  background: linear-gradient(180deg, rgba(12,12,14,0.6), rgba(10,10,12,0.25));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.about-profile-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* ✅ Crops image to fit perfectly */
+  object-position: center;  /* ✅ Centers the face */
+  display: block;
+  transition: transform 0.35s ease;
 }
 
 /* Inner area that holds the image (on top of the ring) */
